@@ -1,4 +1,5 @@
 ﻿using EcoTRack_.Areas.Identity.Data;
+using EcoTRack_.NewModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -12,14 +13,38 @@ public class AppDbContext : IdentityDbContext<EcoTrackUser>
         : base(options)
     {
     }
+    public DbSet<User> Users { get; set; }
+    public DbSet<Electrate> Electrates { get; set; }
+    public DbSet<Insight> Insights { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
-        // Customize the ASP.NET Identity model and override the defaults if needed.
-        // For example, you can rename the ASP.NET Identity table names and more.
-        // Add your customizations after calling base.OnModelCreating(builder);
         builder.ApplyConfiguration(new ApplicationUserEntityConfiguration());
+        base.OnModelCreating(builder);
+
+        // Apply User to EcoTrackUser relationship
+        builder.Entity<User>()
+            .HasOne(u => u.EcoTrackUser)
+            .WithOne()
+            .HasForeignKey<User>(u => u.ID)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        // Define relationship for Electrate and User
+        builder.Entity<Electrate>()
+            .HasOne(e => e.User)
+            .WithMany()
+            .HasForeignKey(e => e.Uid)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        // Define relationship for Insight and User
+        builder.Entity<Insight>()
+            .HasOne(i => i.User)
+            .WithMany()
+            .HasForeignKey(i => i.Uid)
+            .OnDelete(DeleteBehavior.Cascade);
+
+
     }
 }
 

@@ -4,6 +4,7 @@ using EcoTRack_.Areas.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EcoTRack_.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241008062528_first")]
+    partial class first
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -101,68 +104,6 @@ namespace EcoTRack_.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-                });
-
-            modelBuilder.Entity("EcoTRack_.NewModel.Electrate", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Uid")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<decimal>("kwr")
-                        .HasColumnType("decimal(18, 2)");
-
-                    b.Property<decimal>("totalbill")
-                        .HasColumnType("decimal(38, 2)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Uid");
-
-                    b.ToTable("Electrates");
-                });
-
-            modelBuilder.Entity("EcoTRack_.NewModel.Insight", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("InsightText")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Uid")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Uid");
-
-                    b.ToTable("Insights");
-                });
-
-            modelBuilder.Entity("EcoTRack_.NewModel.User", b =>
-                {
-                    b.Property<string>("Uid")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ID")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Uid");
-
-                    b.HasIndex("ID")
-                        .IsUnique()
-                        .HasFilter("[ID] IS NOT NULL");
-
-                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -300,38 +241,6 @@ namespace EcoTRack_.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("EcoTRack_.NewModel.Electrate", b =>
-                {
-                    b.HasOne("EcoTRack_.NewModel.User", "User")
-                        .WithMany()
-                        .HasForeignKey("Uid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("EcoTRack_.NewModel.Insight", b =>
-                {
-                    b.HasOne("EcoTRack_.NewModel.User", "User")
-                        .WithMany()
-                        .HasForeignKey("Uid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("EcoTRack_.NewModel.User", b =>
-                {
-                    b.HasOne("EcoTRack_.Areas.Identity.Data.EcoTrackUser", "EcoTrackUser")
-                        .WithOne()
-                        .HasForeignKey("EcoTRack_.NewModel.User", "ID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.Navigation("EcoTrackUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
