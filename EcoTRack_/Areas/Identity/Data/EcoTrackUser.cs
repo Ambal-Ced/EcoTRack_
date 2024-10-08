@@ -12,7 +12,6 @@ public class EcoTrackUser : IdentityUser
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string Type_ { get; set; }
-    public string PhoneNmber { get; internal set; }
 }
 
 

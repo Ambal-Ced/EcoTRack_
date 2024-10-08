@@ -30,7 +30,7 @@ internal class ApplicationUserEntityConfiguration : IEntityTypeConfiguration<Eco
         builder.Property(x => x.FirstName).HasMaxLength(100);
         builder.Property(x => x.LastName).HasMaxLength(100);
         builder.Property(x => x.Type_).HasMaxLength(100);
-        builder.Property(x => x.PhoneNumber).HasMaxLength(11);
+        builder.Property(x => x.PhoneNumber).HasMaxLength(10);
     }
     
 }

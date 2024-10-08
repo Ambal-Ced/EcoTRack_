@@ -131,8 +131,10 @@ namespace EcoTRack_.Areas.Identity.Pages.Account
                 user.FirstName = Input.FirstName;
                 user.LastName = Input.LastName;
                 user.Type_ = Input.Type_;
-                user.PhoneNumber = Input.Cont;
-                user.PhoneNmber = "User";
+
+                
+
+                
                 
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
@@ -141,6 +143,8 @@ namespace EcoTRack_.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
+
+
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);
