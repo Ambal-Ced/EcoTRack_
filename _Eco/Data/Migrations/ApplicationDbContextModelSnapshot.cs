@@ -232,10 +232,6 @@ namespace _Eco.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("date")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

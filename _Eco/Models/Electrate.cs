@@ -6,7 +6,5 @@
         public float kwh { get; set; }
         public float totalbill { get; set; }
         public string date { get; set; }
-        // New property to store UserId
-        public string UserId { get; set; }
     }
 }
