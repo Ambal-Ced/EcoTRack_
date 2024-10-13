@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using _Eco.Data;
 using _Eco.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace _Eco.Controllers
 {
+    [Authorize]
     public class ElectratesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -22,8 +25,15 @@ namespace _Eco.Controllers
         // GET: Electrates
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Electrates.ToListAsync());
+            // Get the current user's ID
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            // Fetch only the records that belong to the logged-in user
+            var userElectrates = _context.Electrates.Where(e => e.UserId == userId);
+
+            return View(await userElectrates.ToListAsync());
         }
+
 
         // GET: Electrates/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -54,16 +64,25 @@ namespace _Eco.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,kwh,totalbill,date")] Electrate electrate)
+        public async Task<IActionResult> Create([Bind("Id,kwh,totalbill,date,UserId")] Electrate electrate)
         {
             if (ModelState.IsValid)
             {
+                // Set the UserId to the currently logged-in user if not already set
+                if (string.IsNullOrEmpty(electrate.UserId))
+                {
+                    electrate.UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                }
+
                 _context.Add(electrate);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(electrate);
         }
+
+
+
 
         // GET: Electrates/Edit/5
         public async Task<IActionResult> Edit(int? id)

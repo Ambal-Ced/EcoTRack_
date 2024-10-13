@@ -8,7 +8,7 @@ using _Eco.Data;
 
 #nullable disable
 
-namespace _Eco.Data.Migrations
+namespace _Eco.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -231,6 +231,10 @@ namespace _Eco.Data.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("date")
                         .IsRequired()
