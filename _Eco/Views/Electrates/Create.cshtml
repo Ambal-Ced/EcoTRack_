@@ -1,7 +1,14 @@
 ﻿@model _Eco.Models.Electrate
 @using System.Security.Claims
 
-
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - _Eco</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/_Eco.styles.css" asp-append-version="true" />
+</head>
 @{
     ViewData["Title"] = "Create";
 }
@@ -47,14 +54,14 @@
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary btr" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="btn btn-danger ">Back to List</a>
 </div>
 
 @section Scripts {
