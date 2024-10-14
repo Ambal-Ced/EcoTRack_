@@ -1,7 +1,6 @@
 ﻿@model _Eco.Models.Electrate
 @using System.Security.Claims
 
-
 @{
     ViewData["Title"] = "Edit";
 }
@@ -38,7 +37,7 @@
             </div>
 
             <!-- User Email (UserId) selection -->
-            <div class="form-group">
+            <div class="form-group hidingemai">
                 <label asp-for="UserId" class="control-label">Select Email</label>
                 <select asp-for="UserId" class="form-control">
                     <option value="">-- Select your email --</option>
@@ -47,8 +46,12 @@
                 <span asp-validation-for="UserId" class="text-danger"></span>
             </div>
 
+            <!-- Hidden field to ensure UserId is submitted -->
+            <input type="hidden" asp-for="UserId" />
+
+            <!-- Submit button for editing -->
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save Changes" class="btn btn-primary" />
             </div>
         </form>
     </div>

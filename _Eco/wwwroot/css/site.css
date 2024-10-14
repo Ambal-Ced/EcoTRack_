@@ -128,3 +128,7 @@ body {
     margin-top: 1.5vw;
     margin-bottom: 1vw;
 }
+
+.hidingemai{
+    display:none;
+}

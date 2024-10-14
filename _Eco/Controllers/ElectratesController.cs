@@ -105,7 +105,7 @@ namespace _Eco.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,kwh,totalbill,date")] Electrate electrate)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,kwh,totalbill,date,UserId")] Electrate electrate)
         {
             if (id != electrate.Id)
             {
@@ -134,6 +134,7 @@ namespace _Eco.Controllers
             }
             return View(electrate);
         }
+
 
         // GET: Electrates/Delete/5
         public async Task<IActionResult> Delete(int? id)
